@@ -25,7 +25,6 @@ char *read_map(int fd)
             break;
         res = ft_strjoin(res, buff);
     }
-    free(buff);
     return (res);
 }
 

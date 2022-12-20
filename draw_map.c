@@ -114,7 +114,7 @@ int open_window(char *map)
 
 int main()
 {
-    int fd = open("maps/map8.ber",O_RDONLY);
+    int fd = open("maps/map4.ber",O_RDONLY);
     //t_graph crd;
   
     open_window(read_map(fd));

@@ -34,6 +34,7 @@ typedef struct	s_graph
 	void	*dor;
 	void	*img;
 	char	*addr;
+	int 	coin_cpt;
     
 }t_graph;
 
