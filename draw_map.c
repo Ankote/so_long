@@ -12,51 +12,45 @@
 
 #include "so_long.h"
 
-int imgadd(void *mlx, void *win, int x, int y, int base)
+int imgadd(t_graph *data, int x, int y, int base)
 {
-    t_data data;
     int w;
+
+    data->wall =  mlx_xpm_file_to_image(data->mlx,"assets/images/wall.xpm", &w,&w);
+    data->coin =  mlx_xpm_file_to_image(data->mlx,"assets/images/coin-bag.xpm", &w,&w);
+    data->dor =  mlx_xpm_file_to_image(data->mlx,"assets/images/exit-closed.xpm", &w,&w);
+    data->player =  mlx_xpm_file_to_image(data->mlx,"assets/images/player/front.xpm", &w,&w);
+    data->floor =  mlx_xpm_file_to_image(data->mlx,"assets/images/floor.xpm", &w,&w);
     if(base == '1')
-        data.img = mlx_xpm_file_to_image(mlx,"assets/images/wall.xpm", &w,&w);
+        mlx_put_image_to_window(data->mlx, data->mlx_win, data->wall, x, y);
     else if (base == '0')
-        data.img = mlx_xpm_file_to_image(mlx,"assets/images/floor.xpm", &w,&w);
+        mlx_put_image_to_window(data->mlx, data->mlx_win, data->floor, x, y);
     else if (base == 'C')
-    {
-        data.img = mlx_xpm_file_to_image(mlx,"assets/images/floor.xpm", &w,&w);
-        data.img = mlx_xpm_file_to_image(mlx,"assets/images/coin-bag.xpm", &w,&w);
-    }   
+        mlx_put_image_to_window(data->mlx, data->mlx_win, data->coin, x, y);  
     else if (base == 'P')
-    {
-        data.img = mlx_xpm_file_to_image(mlx,"assets/images/floor.xpm", &w,&w);
-        data.img = mlx_xpm_file_to_image(mlx,"assets/images/player/front.xpm", &w,&w);
-    }
+         mlx_put_image_to_window(data->mlx, data->mlx_win, data->player, x, y);
     else
-         data.img = mlx_xpm_file_to_image(mlx,"assets/images/exit-closed.xpm", &w,&w);
-        
-    
-    mlx_put_image_to_window(mlx, win, data.img, x, y);
+          mlx_put_image_to_window(data->mlx, data->mlx_win, data->dor, x, y);
     return (0);
 }
 
-int addimg(char *map, void *mlx, void* win)
+int addimg(t_graph *data)
 {
     int i;
     int j;
     int x;
     int y;
-    char **p;
 
-    p = split_map(map);
     i = 0;
     y = 0;
-
-    while (p[i])
+    mlx_clear_window(data->mlx, data->mlx_win);
+    while (data->p[i])
     {
         j = 0;
         x = 0;
-        while (p[i][j])
+        while (data->p[i][j])
         {
-            imgadd(mlx, win, x, y , p[i][j]);
+            imgadd(data, x, y, data->p[i][j]);
             x += 32;
             j++;
         }
@@ -70,34 +64,32 @@ static int x_graph(char *map)
 {
     int i;
     char **p;
-    t_graph graph;
+    int x_height;
 
     i = 0;
     p = split_map(map);
-    graph.x = 0;
-    while (p[0][i])
-    {
-        graph.x++;
-        i++;
-    }
-    return (graph.x * 32);
+    x_height = ft_strlen(p[0]);
+    printf("%d\n", x_height);
+    free(p);
+    return ( x_height * 32);
 }
 
 static int y_graph(char *map)
 {
     int i;
-    t_graph graph;
+    int y_width;
     char **p;
 
     i = 0;
     p = split_map(map);
-    graph.y = 0;
+    y_width = 0;
     while (p[i])
     {
-        graph.y++;
+        y_width++;
         i++;
     }
-    return (graph.y * 32);
+    free(p);
+    return (y_width * 32);
 }
 
 int open_window(char *map)
@@ -105,19 +97,26 @@ int open_window(char *map)
     int x_width;
     int y_height;
     t_graph graph;
+    graph = *check_player(map, &graph);
+    printf("x = %d  y = %d\n", graph.x_pos,graph.y_pos);
     x_width = x_graph(map);
     y_height = y_graph(map);
+    graph.p = split_map(map);
+    graph.map = map;
     graph.mlx = mlx_init();
     graph.mlx_win = mlx_new_window(graph.mlx, x_width, y_height, "so_long");
-    addimg(map, graph.mlx, graph.mlx_win);
+
+    addimg(&graph);
+    mlx_key_hook(graph.mlx_win,keyhook, &graph);
     mlx_loop(graph.mlx);
     return (0);
 }
 
 int main()
 {
-    int fd = open("assets/maps/valid/map8.ber",O_RDONLY);
+    int fd = open("maps/map8.ber",O_RDONLY);
+    //t_graph crd;
+  
     open_window(read_map(fd));
-    
    // addimg(read_map(fd));
 }

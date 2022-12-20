@@ -45,9 +45,6 @@ char **split_map(char *map)
 //     int fd = open("map1.ber", O_RDONLY);
 //     p = split_map(read_map(fd));
 //     int i = 0;
-//     while(p[i])
-//     {
-//         printf("%s\n",p[i]);
-//         i++;
-//     }
+//     // 
+//     printf("%zu\n",ft_strlen(p[i]));
 // }
