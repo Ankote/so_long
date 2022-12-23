@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "so_long.h"
 
-t_graph *check_player(char *map, t_graph *crd)
+t_graph *check_player_pos(char *map, t_graph *crd)
 {
     int i;
     int j;

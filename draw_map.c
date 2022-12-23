@@ -117,18 +117,22 @@ int open_window(char *map)
 {
     t_graph graph;
     graph.game_over = 0;
-    graph = *check_player(map, &graph);
+    graph = *check_player_pos(map, &graph);
     graph.x_width = x_graph(map);
     graph.y_height = y_graph(map);
     graph.move_cpt = 0;
-    graph.p = split_map(map);
+    graph.p = split_map(map);  
     graph.map = map;
     graph.mlx = mlx_init();
     graph.mlx_win = mlx_new_window(graph.mlx, graph.x_width, graph.y_height, "so_long");
-    addimg(&graph);
+    addimg(&graph); 
+    if(!check_player(&graph))
+        printf("map inv");
     mlx_hook(graph.mlx_win, 2, 0,keyhook, &graph);
-    mlx_hook(graph.mlx_win, 17, 0,close_prog, &graph);
+    mlx_hook(graph.mlx_win, 17, 0,keyhook, &graph);
+   
     mlx_loop(graph.mlx);
+  
     return (0);
 }
 
@@ -137,12 +141,12 @@ int main(int argc ,char **argv)
     int fd;
     if (argc == 2)
     {
-        fd = open(argv[1],O_RDONLY);
-        open_window(read_map(fd));
-    }
-     
-    //t_graph crd;
-  
-    
-   // addimg(read_map(fd));
+        if (!check_name(argv[1]))
+            printf("map invalid");
+        else 
+        {
+            fd = open(argv[1],O_RDONLY);
+            open_window(read_map(fd));
+        }
+    } 
 }

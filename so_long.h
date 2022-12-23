@@ -50,7 +50,7 @@ typedef struct	s_graph
 	int 	move_cpt;
 }	t_graph;
 
-t_graph *check_player(char *map, t_graph *crd);
+t_graph *check_player_pos(char *map, t_graph *crd);
 int event(int keyhook ,t_graph *graph );
 int keyhook(int keyhook ,t_graph *graph );
 int	right_move(t_graph *data);
@@ -68,4 +68,9 @@ int succeed(t_graph *data);
 int count_coins(t_graph *data);
 int game_over(t_graph *data);
 int close_prog(t_graph *graph);
+int check_name(char *mapname);
+int check_circumf(t_graph *data);
+int check_coin(t_graph *data);
+int check_exit(t_graph *data);
+int check_player(t_graph *data);
 #endif
