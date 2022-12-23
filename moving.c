@@ -34,111 +34,80 @@ int count_coins(t_graph *data)
 }
 
 int right_move(t_graph *data)
-{ 
-     data->coin_cpt = 0;
-    if (data->p[data->y_pos][data->x_pos + 1] != '1' && data->p[data->y_pos][data->x_pos + 1] != 'E')
-    {
-        data->p[data->y_pos][data->x_pos] = '0';
-        data->p[data->y_pos][data->x_pos + 1] = 'P';
-        imgadd(data, data->x_pos * 32 , data->y_pos * 32, data->p[data->y_pos][data->x_pos]);
-        imgadd(data, (data->x_pos + 1) * 32 , data->y_pos * 32 , data->p[data->y_pos ][data->x_pos + 1]); 
-        data->x_pos += 1;
-        printf("--Right--\n");
-    }
-    if(data->p[data->y_pos][data->x_pos ] == 'C')
-    {
-        data->coin_cpt ++;
-        if (data->coin_cpt == count_coins(data))
-            exit(0);
-    }
-    if (data->p[data->y_pos][data->x_pos + 1] == 'E' )
+{
+     if(data->p[data->y_pos][data->x_pos + 1] == 'T')
      {
-        mlx_clear_window(data->mlx, data->mlx_win);
-        printf("--Game over--\n");
-        exit(0);
-     }
+        imgadd(data, data->x_pos * 32 , data->y_pos * 32, '0');
+        data->x_pos += 1;
+        game_over(data);
+     }  
+    else if (data->p[data->y_pos][data->x_pos + 1] != '1' && data->p[data->y_pos][data->x_pos + 1] != 'E')
+    {
+        right_move_p(data);
+        if (!count_coins(data))
+            opendor(data);
+        if (data->p[data->y_pos ][data->x_pos] == 'O')
+            succeed(data);
+    }
     return (0); 
 }
 
 int left_move(t_graph *data)
 {
-    data->coin_cpt = 0;
-    if (data->p[data->y_pos][data->x_pos - 1] != '1' && data->p[data->y_pos][data->x_pos - 1] != 'E')
-    {
-        data->p[data->y_pos][data->x_pos] = '0';
-        data->p[data->y_pos][data->x_pos - 1] = 'P';
-        imgadd(data, data->x_pos * 32 , data->y_pos * 32, data->p[data->y_pos][data->x_pos]);
-        imgadd(data, (data->x_pos - 1) * 32 , data->y_pos * 32 , data->p[data->y_pos ][data->x_pos - 1]); 
-        data->x_pos -= 1;
-        printf("--left--\n");
-        
-    }
-    else if(data->p[data->y_pos][data->x_pos] == 'C')
-    {
-        data->coin_cpt ++;
-        if (data->coin_cpt == count_coins(data))
-            exit(0);
-    }
-    if (data->p[data->y_pos][data->x_pos - 1] == 'E' )
+    if(data->p[data->y_pos][data->x_pos - 1] == 'T')
      {
-        mlx_clear_window(data->mlx, data->mlx_win);
-        printf("--Game over--\n");
-        exit(0);
-     }
+        imgadd(data, data->x_pos * 32 , data->y_pos * 32, '0');
+        data->x_pos -= 1;
+        game_over(data);
+     } 
+    else if (data->p[data->y_pos][data->x_pos - 1] != '1' && data->p[data->y_pos][data->x_pos - 1] != 'E')
+    {
+        left_move_p(data);
+        if (!count_coins(data))
+            opendor(data);
+        if (data->p[data->y_pos ][data->x_pos] == 'O')
+            succeed(data);
+    }
     return (0); 
 }
 
 int top_move(t_graph *data)
 {
-    data->coin_cpt = 0;
-    if (data->p[data->y_pos - 1][data->x_pos] != '1' && data->p[data->y_pos - 1][data->x_pos] != 'E')
+    if(data->p[data->y_pos - 1][data->x_pos] == 'T')
     {
-        data->p[data->y_pos][data->x_pos] = '0';
-        data->p[data->y_pos - 1][data->x_pos] = 'P';
-        imgadd(data, data->x_pos * 32 , data->y_pos * 32, data->p[data->y_pos][data->x_pos]);
-        imgadd(data, (data->x_pos) * 32 , (data->y_pos - 1) * 32 , data->p[data->y_pos - 1][data->x_pos]); 
+        imgadd(data, data->x_pos * 32 , data->y_pos * 32, '0');
         data->y_pos -= 1;
-        printf("--Top--\n");
+        game_over(data);
+    } 
+    else if (data->p[data->y_pos - 1][data->x_pos] != '1' && data->p[data->y_pos - 1][data->x_pos] != 'E')
+    { 
+        top_move_p(data);
+        if (!count_coins(data))
+            opendor(data);
+        if (data->p[data->y_pos ][data->x_pos] == 'O')
+            succeed(data);
     }
-    if(data->p[data->y_pos ][data->x_pos] == 'C')
-    {
-        data->coin_cpt ++;
-        if (data->coin_cpt == count_coins(data))
-            exit(0);
-    }
-    if (data->p[data->y_pos - 1][data->x_pos ] == 'E' )
-    {
-        mlx_clear_window(data->mlx, data->mlx_win);
-        printf("--Game over--\n");
-        exit(0);
-    }
+   
     return (0); 
 }
 
 int bottom_move(t_graph *data)
 {
-    data->coin_cpt = 0;
-    if (data->p[data->y_pos + 1][data->x_pos] != '1' && data->p[data->y_pos + 1][data->x_pos] != 'E')
-    {
-        data->p[data->y_pos][data->x_pos] = '0';
-        data->p[data->y_pos + 1][data->x_pos] = 'P';
-        imgadd(data, data->x_pos * 32 , (data->y_pos) * 32, data->p[data->y_pos][data->x_pos]);
-        imgadd(data, (data->x_pos) * 32 , (data->y_pos + 1) * 32 , data->p[data->y_pos + 1][data->x_pos]); 
+    if(data->p[data->y_pos + 1][data->x_pos ] == 'T')
+     {
+        imgadd(data, data->x_pos * 32 , data->y_pos * 32, '0');
         data->y_pos += 1;
-        printf("--Bottom--\n");
+        game_over(data);
+     } 
+    else if (data->p[data->y_pos + 1][data->x_pos] != '1' && data->p[data->y_pos + 1][data->x_pos] != 'E')
+    {  
+        bottom_move_p(data);
+        if (!count_coins(data))
+            opendor(data);
+        if (data->p[data->y_pos ][data->x_pos] == 'O')
+            succeed(data);
     }
-    if(data->p[data->y_pos][data->x_pos] == 'C')
-    {
-        data->coin_cpt ++;
-        if (data->coin_cpt == count_coins(data))
-            exit(0);
-    }
-    if (data->p[data->y_pos + 1][data->x_pos] == 'E' )
-    {
-        mlx_clear_window(data->mlx, data->mlx_win);
-        printf("--Game over--\n");
-        exit(0);
-    }
+    
        
     return (0); 
 }
