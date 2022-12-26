@@ -94,9 +94,9 @@ int check_caract(t_graph *data)
         {
             if (data->p[i][j] != '0' && data->p[i][j] != '1' 
                 && data->p[i][j] != 'C' && data->p[i][j] != 'E'
-                    && data->p[i][j] != 'P')
+                    && data->p[i][j] != 'P' && data->p[i][j] != 'T')
 					{
-						printf("ERROR!!\nThe map can be composed of only these 5 characters: {0,1,E,C,P}.\n");
+						printf("ERROR!!\nThe map can be composed of only these 5 characters: {0,1,E,C,P}, and {T} for enemy\n");
 						return (0);
 					}
                 

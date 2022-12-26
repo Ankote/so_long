@@ -82,7 +82,6 @@ int check_coin(t_graph *data)
     {
         printf("ERROR!\n The map must contain  at least 1 collectible.\n");
         return (0);
-    }
-        
+    }  
     return (1);
 }

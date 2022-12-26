@@ -80,4 +80,6 @@ void floodFill(char **p, int sr, int sc,int base);
 void img_path(t_graph *data);
 int move (t_graph *data);
 int anim(t_graph *data);
+int check_map(t_graph *data);
+int check_path(t_graph *data, int base);
 #endif
