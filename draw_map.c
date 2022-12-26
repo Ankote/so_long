@@ -28,6 +28,7 @@ t_graph *img_path(t_graph *data)
     data->dead =  mlx_xpm_file_to_image(data->mlx,"assets/images/game-over.xpm", &w,&w);
     return (data);
 }
+
 int imgadd(t_graph *data, int x, int y, int base)
 {
     data = img_path(data);
@@ -92,7 +93,7 @@ static int x_graph(char *map)
     p = split_map(map);
     x_height = ft_strlen(p[0]);
     free(p);
-    return ( x_height * 32);
+    return (x_height * 32);
 }
 
 static int y_graph(char *map)
@@ -115,23 +116,21 @@ static int y_graph(char *map)
 
 int open_window(char *map)
 {
-    t_graph graph;
-    graph.game_over = 0;
-    graph = *check_player_pos(map, &graph);
-    graph.x_width = x_graph(map);
-    graph.y_height = y_graph(map);
-    graph.move_cpt = 0;
-    graph.p = split_map(map);  
-    graph.map = map;
-    graph.mlx = mlx_init();
-    graph.mlx_win = mlx_new_window(graph.mlx, graph.x_width, graph.y_height, "so_long");
-    addimg(&graph); 
-    if(!check_player(&graph))
-        printf("map inv");
-    mlx_hook(graph.mlx_win, 2, 0,keyhook, &graph);
-    mlx_hook(graph.mlx_win, 17, 0,keyhook, &graph);
-   
-    mlx_loop(graph.mlx);
+    t_graph data;
+    data.game_over = 0;
+    data = *check_player_pos(map, &data); 
+    data.x_width = x_graph(map);
+    data.y_height = y_graph(map);
+    data.move_cpt = 0;
+    data.p = split_map(map);  
+    data.map = map;
+    data.mlx = mlx_init();
+    data.mlx_win = mlx_new_window(data.mlx, data.x_width, data.y_height, "so_long");
+    addimg(&data); 
+   // floodFill(data.p, y, x, 'E');
+    mlx_hook(data.mlx_win, 2, 0,keyhook, &data);
+    mlx_hook(data.mlx_win, 17, 0,close_prog, &data);
+    mlx_loop(data.mlx);
   
     return (0);
 }

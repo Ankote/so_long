@@ -73,4 +73,8 @@ int check_circumf(t_graph *data);
 int check_coin(t_graph *data);
 int check_exit(t_graph *data);
 int check_player(t_graph *data);
+int check_caract(t_graph *data);
+int check_rect(t_graph *data);
+void floodFill(char **p, int sr, int sc,int base);
+
 #endif
