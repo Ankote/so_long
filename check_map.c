@@ -1,80 +1,42 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   check_map.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: aankote <marvin@42.fr>                     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/23 02:59:25 by aankote           #+#    #+#             */
-/*   Updated: 2022/12/23 02:59:26 by aankote          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 #include "so_long.h"
 
-int check_name(char *mapname)
+void floodFill(char **p, int sr, int sc, int base)
 {
-    int i;
-    int j;
-    char *p;
-
-    p = ft_calloc(4,1);
-    p = "ber";
-    i = 0;
-    j = 0;
-    while(mapname[i] && mapname[i] != '.')
-        i++;
-    i ++;
-    if (!ft_strncmp(p, mapname + i, 4))
-        return (1);
-    return (0);
+    // Condition for checking out of bounds
+    if (p[sr][sc] != '0' && p[sr][sc] != 'P' && p[sr][sc] != base)
+        return;
+    p[sr][sc] = 'V'; 
+    floodFill(p, sr, sc - 1, base); // left
+    floodFill(p, sr + 1, sc, base); // bottom
+    floodFill(p, sr - 1, sc, base); // top
+    floodFill(p, sr, sc + 1, base); // right
 }
 
-int ft_check_hor(char *p)
+int check_path(t_graph *data, int base)
 {
-    int i;
+    char **p;
+    int x;
+    int y;
 
-    i = 0;
-    while (p[i])
+    x = data->x_pos;
+    y = data->y_pos;
+    p = data->p;
+    floodFill(p, y, x, base);
+    if (base == 'E')
     {
-        if(p[i] != '1')
-            return (0);
-        i ++;
+        if (check_exit(data))
+        {
+            printf("ERROR!there is no valid path to go the exit.\n");
+            return (free(p), 0);
+        }   
     }
-    return (1);
-}
-
-int check_vir(t_graph *data)
-{
-    int i;
-
-    i = 0;
-    while (data->p[i])
+    else if (base == 'C')
     {
-        if (data->p[i][0] != '1' || data->p[i][ft_strlen(data->p[i]) - 1] != '1' )
-            return (0);
-        i ++;
-    }
-    return (1);
-}
-
-int check_circumf(t_graph *data)
-{
-    int i;
-
-    i = 0;
-    while(data->p[i])
-        i ++;
-    if (!ft_check_hor(data->p[0]) || !ft_check_hor(data->p[i - 1])
-        || !check_vir(data))
-    {
-        return (0);
-    }
-    return (1);
-}
-
-int check_coin(t_graph *data)
-{
-    if(!ft_strchr(data->map, 'C'))
-        return (0);
-    return (1);
+        if (check_coin(data))
+        {
+            printf("ERROR!there is no valid path to catch all collectibles\n");
+            return (free (p), 0);
+        } 
+    }  
+    return (free(p), 1);
 }

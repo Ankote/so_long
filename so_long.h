@@ -48,6 +48,7 @@ typedef struct	s_graph
 	int 	x_dor;
 	int 	y_dor;
 	int 	move_cpt;
+	int frame;
 }	t_graph;
 
 t_graph *check_player_pos(char *map, t_graph *crd);
@@ -76,5 +77,7 @@ int check_player(t_graph *data);
 int check_caract(t_graph *data);
 int check_rect(t_graph *data);
 void floodFill(char **p, int sr, int sc,int base);
-
+void img_path(t_graph *data);
+int move (t_graph *data);
+int anim(t_graph *data);
 #endif

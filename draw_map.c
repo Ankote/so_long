@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "so_long.h"
-t_graph *img_path(t_graph *data)
+void img_path(t_graph *data)
 {
     int w;
 
@@ -26,12 +26,11 @@ t_graph *img_path(t_graph *data)
     data->p_right =  mlx_xpm_file_to_image(data->mlx,"assets/images/player/right.xpm", &w,&w);
     data->p_top =  mlx_xpm_file_to_image(data->mlx,"assets/images/player/back.xpm", &w,&w);
     data->dead =  mlx_xpm_file_to_image(data->mlx,"assets/images/game-over.xpm", &w,&w);
-    return (data);
 }
 
 int imgadd(t_graph *data, int x, int y, int base)
 {
-    data = img_path(data);
+    
     if(base == '1')
         mlx_put_image_to_window(data->mlx, data->mlx_win, data->wall, x, y);
     else if (base == '0')
@@ -81,71 +80,4 @@ int addimg(t_graph *data)
         i++;
     }
     return (0);
-}
-
-static int x_graph(char *map)
-{
-    int i;
-    char **p;
-    int x_height;
-
-    i = 0;
-    p = split_map(map);
-    x_height = ft_strlen(p[0]);
-    free(p);
-    return (x_height * 32);
-}
-
-static int y_graph(char *map)
-{
-    int i;
-    int y_width;
-    char **p;
-
-    i = 0;
-    p = split_map(map);
-    y_width = 0;
-    while (p[i])
-    {
-        y_width++;
-        i++;
-    }
-    free(p);
-    return (y_width * 32);
-}
-
-int open_window(char *map)
-{
-    t_graph data;
-    data.game_over = 0;
-    data = *check_player_pos(map, &data); 
-    data.x_width = x_graph(map);
-    data.y_height = y_graph(map);
-    data.move_cpt = 0;
-    data.p = split_map(map);  
-    data.map = map;
-    data.mlx = mlx_init();
-    data.mlx_win = mlx_new_window(data.mlx, data.x_width, data.y_height, "so_long");
-    addimg(&data); 
-   // floodFill(data.p, y, x, 'E');
-    mlx_hook(data.mlx_win, 2, 0,keyhook, &data);
-    mlx_hook(data.mlx_win, 17, 0,close_prog, &data);
-    mlx_loop(data.mlx);
-  
-    return (0);
-}
-
-int main(int argc ,char **argv)
-{ 
-    int fd;
-    if (argc == 2)
-    {
-        if (!check_name(argv[1]))
-            printf("map invalid");
-        else 
-        {
-            fd = open(argv[1],O_RDONLY);
-            open_window(read_map(fd));
-        }
-    } 
 }

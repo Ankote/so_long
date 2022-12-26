@@ -39,3 +39,37 @@ int close_prog(t_graph *graph)
     return (0);
 }
 
+void	anime_gold(t_graph *data)
+{
+    int w;
+	if (data->frame == 20)
+    {
+        data->coin = mlx_xpm_file_to_image(data->mlx,
+				"assets/images/coin-bag.xpm", &w, &w);
+        data->toxic = mlx_xpm_file_to_image(data->mlx,
+				"assets/images/toxic-red.xpm", &w, &w);
+
+    }
+	else if (data->frame == 40)
+    {
+        data->coin = mlx_xpm_file_to_image(data->mlx,
+				"assets/images/coin-bag2.xpm", &w, &w);
+                data->toxic = mlx_xpm_file_to_image(data->mlx,
+				"assets/images/toxic-river.xpm", &w, &w);
+    }	
+    if(data->frame ==40)  
+        data->frame = -1;
+}
+
+int anim(t_graph *data)
+{
+    if(!data->game_over)
+    {
+        anime_gold(data);
+        mlx_clear_window(data->mlx,data->mlx_win);
+        addimg(data);
+        mlx_string_put(data->mlx,data->mlx_win, 5, 5,0xFF0000, ft_strjoin("Move : ", ft_itoa(data->move_cpt)));
+        data->frame ++;
+    }
+    return (0);
+}
