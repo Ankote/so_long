@@ -46,7 +46,7 @@ int right_move(t_graph *data)
         right_move_p(data);
         if (!count_coins(data))
             opendor(data);
-        if (data->p[data->y_pos ][data->x_pos] == 'O')
+        if (data->p[data->y_pos][data->x_pos] == 'O')
             succeed(data);
     }
     return (0); 

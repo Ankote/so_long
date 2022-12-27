@@ -46,7 +46,7 @@ int check_path(t_graph *data, int base)
     {
         if (!check_exist(p, 'E'))
         {
-            printf("ERROR!\nthere is no valid path to go the exit.\n");
+            ft_putstr_fd("ERROR!\nthere is no valid path to go the exit.\n", 1);
             return (free(p), 0);
         }  
     }
@@ -54,7 +54,7 @@ int check_path(t_graph *data, int base)
     {
         if (!check_exist(p, 'C'))
         {
-            printf("ERROR!\nthere is no valid path to catch all collectibles\n");
+            ft_putstr_fd("ERROR!\nthere is no valid path to catch all collectibles\n", 1);
             return (free (p), 0);
         }
     }  

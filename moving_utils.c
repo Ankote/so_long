@@ -24,7 +24,7 @@ int right_move_p(t_graph *data)
         data->x_pos += 1;
         data->move_cpt ++;
         mlx_string_put(data->mlx,data->mlx_win, 5, 5,0xFF0000, ft_strjoin("Move : ", ft_itoa(data->move_cpt)));
-        printf("Move : right\n" );
+        ft_putstr_fd("Move : right\n", 1);
         
         return (0);
 }
@@ -42,7 +42,7 @@ int left_move_p(t_graph *data)
         data->x_pos -= 1;
         data->move_cpt ++;
         mlx_string_put(data->mlx,data->mlx_win, 5, 5,0xFF0000, ft_strjoin("Move : ", ft_itoa(data->move_cpt)));
-        printf("Move : left\n" );
+        ft_putstr_fd("Move : left\n", 1);
         return (0);
 }
 
@@ -60,7 +60,7 @@ int top_move_p(t_graph *data)
         data->y_pos -= 1;
         data->move_cpt ++;
                 mlx_string_put(data->mlx,data->mlx_win, 5, 5,0xFF0000, ft_strjoin("Move : ", ft_itoa(data->move_cpt)));
-                printf("Move : up\n" );
+                ft_putstr_fd("Move : up\n", 1);
         return (0);
 }
 
@@ -78,7 +78,7 @@ int bottom_move_p(t_graph *data)
         data->y_pos += 1;
         data->move_cpt ++;
         mlx_string_put(data->mlx,data->mlx_win, 5, 5,0xFF0000, ft_strjoin("Move : ", ft_itoa(data->move_cpt)));
-        printf("Move : down\n" );
+        ft_putstr_fd("Move : down\n", 1);
         return (1);
         return (0);
 }

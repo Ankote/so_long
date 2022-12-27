@@ -99,7 +99,7 @@ int main(int argc ,char **argv)
             fd = open(argv[1],O_RDONLY); 
             if (fd < 0)
             {
-                printf("path map name invalid");
+                ft_putstr_fd("ERROR!\npath map name invalid.\n", 1);
                 return (0);;
             }
                 

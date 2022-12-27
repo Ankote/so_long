@@ -37,13 +37,3 @@ char **split_map(char *map)
     p = ft_split (map, '\n');
     return (p);
 }
-
-// int main(void)
-// {
-//     char **p;
-//     int fd = open("map1.ber", O_RDONLY);
-//     p = split_map(read_map(fd));
-//     int i = 0;
-//     // 
-//     printf("%zu\n",ft_strlen(p[i]));
-// }

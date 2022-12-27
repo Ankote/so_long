@@ -24,7 +24,7 @@ int check_name(char *mapname)
     i ++;
     if (ft_strncmp(p, mapname + i, 4))
     {
-        printf("ERROR!\n the map name has to ended with .ber extention.\n");
+        ft_putstr_fd("ERROR!\n the map name has to ended with .ber extention.\n", 1);
         return (0);
     }
     //free(p);
@@ -69,7 +69,7 @@ int check_circumf(t_graph *data)
     if (!ft_check_hor(data) || !ft_check_hor(data)
         || !check_vir(data))
     {
-        printf("ERROR!\n the has to be closed.\n");
+        ft_putstr_fd("ERROR!\n the has to be closed.\n", 1);
         return (0);
 
     }
@@ -80,7 +80,7 @@ int check_coin(t_graph *data)
 {
     if(!ft_strchr(data->map, 'C'))
     {
-        printf("ERROR!\n The map must contain  at least 1 collectible.\n");
+        ft_putstr_fd("ERROR!\n The map must contain  at least 1 collectible.\n", 1);
         return (0);
     }  
     return (1);

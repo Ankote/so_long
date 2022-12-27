@@ -26,13 +26,13 @@ int check_player(t_graph *data)
         i++;
         if(cpt > 1)
 		{
-			printf("ERROR!\nThe map must contain at most 1 Player.\n");
+			ft_putstr_fd("ERROR!\nThe map must contain at most 1 Player.\n", 1);
             return (0);
         } 
     }
     if (!cpt)
     {
-        printf("ERROR!\nThe map must contain 1 Player.\n");
+        ft_putstr_fd("ERROR!\nThe map must contain 1 Player.\n", 1);
         return (0);
     } 
    return (1); 
@@ -52,13 +52,13 @@ int check_exit(t_graph *data)
         i++;
         if(cpt > 1)
 		{
-			printf("ERROR!\nThe map must contain at most 1 exit.\n");
+			ft_putstr_fd("ERROR!\nThe map must contain at most 1 exit.\n", 1);
             return (0);
         } 
     }
     if (!cpt)
     {
-       printf("ERROR!\nThe map must contain 1 exit.\n");
+       ft_putstr_fd("ERROR!\nThe map must contain 1 exit.\n", 1);
         return (0);
     } 
    return (1); 
@@ -73,7 +73,7 @@ int check_rect(t_graph *data)
     {
         if(ft_strlen(data->p[i]) != ft_strlen(data->p[i + 1]))
 		{
-			printf("ERROR!\nThe map must be rectangular.\n");
+			ft_putstr_fd("ERROR!\nThe map must be rectangular.\n", 1);
 			return (0);
 		}
         i ++;
@@ -96,7 +96,7 @@ int check_caract(t_graph *data)
                 && data->p[i][j] != 'C' && data->p[i][j] != 'E'
                     && data->p[i][j] != 'P' && data->p[i][j] != 'T')
 					{
-						printf("ERROR!!\nThe map can be composed of only these 5 characters: {0,1,E,C,P}, and {T} for enemy\n");
+						ft_putstr_fd("ERROR!!\nThe map can be composed of only these 5 characters: {0,1,E,C,P}, and {T} for enemy.\n", 1);
 						return (0);
 					}
                 
