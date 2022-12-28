@@ -51,8 +51,8 @@ typedef struct s_graph
 	int		frame;
 }			t_graph;
 
-t_graph		*check_pos(char *map, t_graph *crd);
-
+t_graph		*check_pos(char *map, int i, t_graph *crd);
+void		ft_error(char *msg);
 int			event(int keyhook, t_graph *graph);
 int			keyhook(int keyhook, t_graph *graph);
 int			right_move(t_graph *data);

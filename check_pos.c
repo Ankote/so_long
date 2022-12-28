@@ -11,13 +11,11 @@
 /* ************************************************************************** */
 #include "so_long.h"
 
-t_graph	*check_pos(char *map, t_graph *crd)
+t_graph	*check_pos(char *map, int i, t_graph *crd)
 {
-	int		i;
 	int		j;
 	char	**p;
 
-	i = 0;
 	p = split_map(map);
 	while (p[i])
 	{

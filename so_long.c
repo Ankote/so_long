@@ -11,34 +11,28 @@
 /* ************************************************************************** */
 #include "so_long.h"
 
-static int	x_graph(char *map)
+static int	x_graph(t_graph *data)
 {
-	int		i;
-	char	**p;
-	int		x_height;
+	int	i;
+	int	x_height;
 
 	i = 0;
-	p = split_map(map);
-	x_height = ft_strlen(p[0]);
-	free_p(p);
+	x_height = ft_strlen(data->p[0]);
 	return (x_height * 32);
 }
 
-static int	y_graph(char *map)
+static int	y_graph(t_graph *data)
 {
-	int		i;
-	int		y_width;
-	char	**p;
+	int	i;
+	int	y_width;
 
 	i = 0;
-	p = split_map(map);
 	y_width = 0;
-	while (p[i])
+	while (data->p[i])
 	{
 		y_width++;
 		i++;
 	}
-	free_p(p);
 	return (y_width * 32);
 }
 
@@ -47,15 +41,17 @@ int	open_window(char *map)
 	t_graph	data;
 
 	data.game_over = 0;
-	data = *check_pos(map, &data);
-	data.x_width = x_graph(map);
-	data.y_height = y_graph(map);
+	data = *check_pos(map, 0, &data);
 	data.move_cpt = 0;
 	data.p = split_map(map);
+	if (!data.p)
+		ft_error("ERROR!!\nNULL map");
 	data.map = map;
+	data.x_width = x_graph(&data);
+	data.y_height = y_graph(&data);
 	data.frame = 0;
 	if (!check_map(&data))
-		return (free_p(data.p),free(data.map),0);
+		return (0);
 	data.mlx = mlx_init();
 	data.mlx_win = mlx_new_window(data.mlx, data.x_width, data.y_height,
 			"so_long");
@@ -65,8 +61,6 @@ int	open_window(char *map)
 	mlx_loop_hook(data.mlx, anim, &data);
 	mlx_hook(data.mlx_win, 17, 0, close_prog, &data);
 	mlx_loop(data.mlx);
-	free_p(data.p);
-	
 	return (1);
 }
 
@@ -93,7 +87,8 @@ int	check_map(t_graph *data)
 
 int	main(int argc, char **argv)
 {
-	int	fd;
+	int		fd;
+	char	*map;
 
 	if (argc == 2)
 	{
@@ -102,13 +97,16 @@ int	main(int argc, char **argv)
 		else
 		{
 			fd = open(argv[1], O_RDONLY);
+			map = read_map(fd);
+			if (!map)
+				ft_error("ERROR!!\nNULL map");
 			if (fd < 0)
 			{
 				ft_putstr_fd("ERROR!\npath map name invalid.\n", 1);
-				return (0);
+				return (free(map), 0);
 			}
-			if (open_window(read_map(fd)))
-				return (1);
+			open_window(map);
 		}
 	}
+	return (0);
 }

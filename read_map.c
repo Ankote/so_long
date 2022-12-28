@@ -12,6 +12,21 @@
 
 #include "so_long.h"
 
+char	*ft_join(char *r_buff, char *buff)
+{
+	char	*temp;
+
+	temp = ft_strjoin(r_buff, buff);
+	free(r_buff);
+	return (temp);
+}
+
+void	ft_error(char *msg)
+{
+	ft_putstr_fd(msg, 1);
+	exit(1);
+}
+
 char	*read_map(int fd)
 {
 	char	*buff;
@@ -23,9 +38,11 @@ char	*read_map(int fd)
 		buff = get_next_line(fd);
 		if (!buff)
 			break ;
-		res = ft_strjoin(res, buff);
+		if (ft_strlen(buff) == 1)
+			ft_error("ERROR!\nEmpty line in map.\n");
+		free(buff);
+		res = ft_join(res, buff);
 	}
-	free (buff);
 	return (res);
 }
 

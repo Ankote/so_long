@@ -63,8 +63,8 @@ void	anime_gold(t_graph *data)
 
 int	anim(t_graph *data)
 {
-	char *s;
-	char *p;
+	char	*s;
+	char	*p;
 
 	p = ft_itoa(data->move_cpt);
 	s = ft_strjoin("Move : ", p);

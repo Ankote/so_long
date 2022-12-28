@@ -28,13 +28,12 @@ int	game_over(t_graph *data)
 	return (0);
 }
 
-
-void free_p(char **p)
+void	free_p(char **p)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while(p[i])
+	while (p[i])
 		free(p[i++]);
 	free(p);
 }

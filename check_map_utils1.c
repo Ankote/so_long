@@ -18,6 +18,8 @@ int	check_name(char *mapname)
 
 	p = ft_strdup("ber");
 	i = 0;
+	if (ft_strlen (mapname) <= 4)
+		ft_error("ERROR!\n the map name has to ended with .ber extention.\n");
 	while (mapname[i] && mapname[i] != '.')
 		i++;
 	i++;
@@ -31,14 +33,14 @@ int	check_name(char *mapname)
 	return (1);
 }
 
-static int	ft_check_hor(t_graph *data)
+static int	ft_check_hor(t_graph *data, int line)
 {
 	int	i;
 
 	i = 0;
-	while (data->p[0][i])
+	while (data->p[line][i])
 	{
-		if (data->p[0][i] != '1')
+		if (data->p[line][i] != '1')
 			return (0);
 		i++;
 	}
@@ -52,8 +54,9 @@ static int	check_vir(t_graph *data)
 	i = 0;
 	while (data->p[i])
 	{
-		if (data->p[i][0] != '1' || data->p[i][ft_strlen(data->p[i])
-			- 1] != '1')
+		if (data->p[i][0] && (data->p[i][0] != '1'
+			|| data->p[i][ft_strlen(data->p[i])
+			- 1] != '1'))
 			return (0);
 		i++;
 	}
@@ -67,7 +70,8 @@ int	check_circumf(t_graph *data)
 	i = 0;
 	while (data->p[i])
 		i++;
-	if (!ft_check_hor(data) || !ft_check_hor(data) || !check_vir(data))
+	if (!ft_check_hor(data, 0) || !ft_check_hor(data, i - 1)
+		|| !check_vir(data))
 	{
 		ft_putstr_fd("ERROR!\n the has to be closed.\n", 1);
 		return (0);
@@ -79,8 +83,8 @@ int	check_coin(t_graph *data)
 {
 	if (!ft_strchr(data->map, 'C'))
 	{
-		ft_putstr_fd("ERROR!\n The map must contain  at least 1 collectible.\n",
-			1);
+		ft_putstr_fd("ERROR!\n The map must contain  at least 1 \
+collectible.\n", 1);
 		return (0);
 	}
 	return (1);
