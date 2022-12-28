@@ -12,28 +12,29 @@
 
 #include "so_long.h"
 
-char *read_map(int fd)
+char	*read_map(int fd)
 {
-    char *buff;
-    char *res;
-    
-    res = ft_calloc(1, 1);
-    while (1)
-    {
-        buff = get_next_line(fd);
-        if (!buff)
-            break;
-        res = ft_strjoin(res, buff);
-    }
-    return (res);
+	char	*buff;
+	char	*res;
+
+	res = ft_calloc(1, 1);
+	while (1)
+	{
+		buff = get_next_line(fd);
+		if (!buff)
+			break ;
+		res = ft_strjoin(res, buff);
+	}
+	free (buff);
+	return (res);
 }
 
-char **split_map(char *map)
+char	**split_map(char *map)
 {
-    char **p;
+	char	**p;
 
-    if (!map)
-        return (0);
-    p = ft_split (map, '\n');
-    return (p);
+	if (!map)
+		return (0);
+	p = ft_split(map, '\n');
+	return (p);
 }

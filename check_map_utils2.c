@@ -12,98 +12,97 @@
 
 #include "so_long.h"
 
-int check_player(t_graph *data)
+int	check_player(t_graph *data)
 {
-    int i;
-    int cpt;
+	int	i;
+	int	cpt;
 
-    i = 0;
-    cpt = 0;
-    while (data->map[i])
-    {
-        if(data->map[i] == 'P')
-            cpt ++;
-        i++;
-        if(cpt > 1)
+	i = 0;
+	cpt = 0;
+	while (data->map[i])
+	{
+		if (data->map[i] == 'P')
+			cpt++;
+		i++;
+		if (cpt > 1)
 		{
 			ft_putstr_fd("ERROR!\nThe map must contain at most 1 Player.\n", 1);
-            return (0);
-        } 
-    }
-    if (!cpt)
-    {
-        ft_putstr_fd("ERROR!\nThe map must contain 1 Player.\n", 1);
-        return (0);
-    } 
-   return (1); 
+			return (0);
+		}
+	}
+	if (!cpt)
+	{
+		ft_putstr_fd("ERROR!\nThe map must contain 1 Player.\n", 1);
+		return (0);
+	}
+	return (1);
 }
 
-int check_exit(t_graph *data)
+int	check_exit(t_graph *data)
 {
-    int i;
-    int cpt;
+	int	i;
+	int	cpt;
 
-    cpt = 0;
-    i = 0;
-    while (data->map[i])
-    {
-        if(data->map[i] == 'E')
-            cpt ++;
-        i++;
-        if(cpt > 1)
+	cpt = 0;
+	i = 0;
+	while (data->map[i])
+	{
+		if (data->map[i] == 'E')
+			cpt++;
+		i++;
+		if (cpt > 1)
 		{
 			ft_putstr_fd("ERROR!\nThe map must contain at most 1 exit.\n", 1);
-            return (0);
-        } 
-    }
-    if (!cpt)
-    {
-       ft_putstr_fd("ERROR!\nThe map must contain 1 exit.\n", 1);
-        return (0);
-    } 
-   return (1); 
+			return (0);
+		}
+	}
+	if (!cpt)
+	{
+		ft_putstr_fd("ERROR!\nThe map must contain 1 exit.\n", 1);
+		return (0);
+	}
+	return (1);
 }
 
-int check_rect(t_graph *data)
+int	check_rect(t_graph *data)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (data->p[i] && data->p[i + 1])
-    {
-        if(ft_strlen(data->p[i]) != ft_strlen(data->p[i + 1]))
+	i = 0;
+	while (data->p[i] && data->p[i + 1])
+	{
+		if (ft_strlen(data->p[i]) != ft_strlen(data->p[i + 1]))
 		{
 			ft_putstr_fd("ERROR!\nThe map must be rectangular.\n", 1);
 			return (0);
 		}
-        i ++;
-    }
-    return (1);
+		i++;
+	}
+	return (1);
 }
 
-int check_caract(t_graph *data)
+int	check_caract(t_graph *data)
 {
-    int i;
-    int j;
+	int	i;
+	int	j;
 
-    i = 0;
-    while(data->p[i])
-    {
-        j = 0;
-        while (data->p[i][j])
-        {
-            if (data->p[i][j] != '0' && data->p[i][j] != '1' 
-                && data->p[i][j] != 'C' && data->p[i][j] != 'E'
-                    && data->p[i][j] != 'P' && data->p[i][j] != 'T')
-					{
-						ft_putstr_fd("ERROR!!\nThe map can be composed of only these 5 characters: {0,1,E,C,P}, and {T} for enemy.\n", 1);
-						return (0);
-					}
-                
-            j ++;
-        }
-        i++;
-    }
-    return (1);
+	i = 0;
+	while (data->p[i])
+	{
+		j = 0;
+		while (data->p[i][j])
+		{
+			if (data->p[i][j] != '0' && data->p[i][j] != '1'
+				&& data->p[i][j] != 'C' && data->p[i][j] != 'E'
+				&& data->p[i][j] != 'P' && data->p[i][j] != 'T')
+			{
+				ft_putstr_fd("ERROR!!\nThe map can be composed of only these 5 characters:\
+ {0,1,E,C,P}, and {T} for enemy.\n", 1);
+				return (0);
+			}
+			j++;
+		}
+		i++;
+	}
+	return (1);
 }
-

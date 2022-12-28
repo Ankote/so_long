@@ -12,18 +12,29 @@
 
 #include "so_long.h"
 
-int succeed(t_graph *data)
+int	succeed(t_graph *data)
 {
-    mlx_clear_window(data->mlx, data->mlx_win);
-    ft_putstr_fd("--YOU WIN--\n", 1);
-    exit(0);
-    return (0);
+	mlx_clear_window(data->mlx, data->mlx_win);
+	ft_putstr_fd("--YOU WIN--\n", 1);
+	exit(0);
+	return (0);
 }
 
-int game_over(t_graph *data)
+int	game_over(t_graph *data)
 {
-    imgadd(data, data->x_width/2 - 65  , data->y_height/2 - 39, 'D');
-    ft_putstr_fd("𝙂𝘼𝙈𝙀 𝙊𝙑𝙀𝙍\n", 1);
-    data->game_over = 1;
-    return (0);
+	imgadd(data, data->x_width / 2 - 65, data->y_height / 2 - 39, 'D');
+	ft_putstr_fd("𝙂𝘼𝙈𝙀 𝙊𝙑𝙀𝙍\n", 1);
+	data->game_over = 1;
+	return (0);
+}
+
+
+void free_p(char **p)
+{
+	int i;
+
+	i = 0;
+	while(p[i])
+		free(p[i++]);
+	free(p);
 }
