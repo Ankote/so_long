@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aankote <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/22 19:22:56 by aankote           #+#    #+#             */
-/*   Updated: 2022/12/22 19:22:59 by aankote          ###   ########.fr       */
+/*   Created: 2022/10/31 03:50:48 by aankote           #+#    #+#             */
+/*   Updated: 2022/10/31 03:50:51 by aankote          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
-#include "so_long.h"
-
-int	succeed(t_graph *data)
+t_list	*ft_lstlast(t_list *lst)
 {
-	mlx_clear_window(data->mlx, data->mlx_win);
-	ft_putstr_fd("--YOU WIN--\n", 1);
-	exit(0);
-	return (0);
-}
-
-void	free_p(char **p)
-{
-	int	i;
-
-	i = 0;
-	while (p[i])
-		free(p[i++]);
-	free(p);
+	while (lst)
+	{
+		if (lst->next == NULL)
+			return (lst);
+		lst = lst->next;
+	}
+	return (lst);
 }

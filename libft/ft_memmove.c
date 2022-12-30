@@ -1,31 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aankote <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/22 19:22:56 by aankote           #+#    #+#             */
-/*   Updated: 2022/12/22 19:22:59 by aankote          ###   ########.fr       */
+/*   Created: 2022/10/07 21:44:24 by aankote           #+#    #+#             */
+/*   Updated: 2022/10/25 01:35:21 by aankote          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
-#include "so_long.h"
-
-int	succeed(t_graph *data)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	mlx_clear_window(data->mlx, data->mlx_win);
-	ft_putstr_fd("--YOU WIN--\n", 1);
-	exit(0);
-	return (0);
-}
-
-void	free_p(char **p)
-{
-	int	i;
+	size_t	i;
 
 	i = 0;
-	while (p[i])
-		free(p[i++]);
-	free(p);
+	if (dst == 0 && src == 0)
+		return (0);
+	if (dst == src)
+		return (dst);
+	if (dst > src)
+	{
+		while (len > 0)
+		{
+			((unsigned char *)dst)[len - 1] = ((unsigned char *)src)[len - 1];
+			len--;
+		}
+	}
+	else
+	{
+		while (i < len)
+		{
+			((unsigned char *)dst)[i] = ((unsigned char *)src)[i];
+			i++;
+		}
+	}
+	return (dst);
 }

@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aankote <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/22 19:22:56 by aankote           #+#    #+#             */
-/*   Updated: 2022/12/22 19:22:59 by aankote          ###   ########.fr       */
+/*   Created: 2022/10/20 06:06:11 by aankote           #+#    #+#             */
+/*   Updated: 2022/10/25 01:37:50 by aankote          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
-#include "so_long.h"
-
-int	succeed(t_graph *data)
-{
-	mlx_clear_window(data->mlx, data->mlx_win);
-	ft_putstr_fd("--YOU WIN--\n", 1);
-	exit(0);
-	return (0);
-}
-
-void	free_p(char **p)
+void	ft_putstr_fd(char *s, int fd)
 {
 	int	i;
 
 	i = 0;
-	while (p[i])
-		free(p[i++]);
-	free(p);
+	if (s)
+	{
+		while (s[i])
+		{
+			write(fd, &s[i], 1);
+			i++;
+		}
+	}
 }

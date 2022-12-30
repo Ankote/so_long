@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aankote <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/22 19:22:56 by aankote           #+#    #+#             */
-/*   Updated: 2022/12/22 19:22:59 by aankote          ###   ########.fr       */
+/*   Created: 2022/10/07 11:48:58 by aankote           #+#    #+#             */
+/*   Updated: 2022/10/25 00:15:26 by aankote          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
-#include "so_long.h"
-
-int	succeed(t_graph *data)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	mlx_clear_window(data->mlx, data->mlx_win);
-	ft_putstr_fd("--YOU WIN--\n", 1);
-	exit(0);
-	return (0);
-}
+	size_t	i;
 
-void	free_p(char **p)
-{
-	int	i;
-
+	if (dst == 0 && src == 0)
+		return (0);
+	if (src == dst)
+		return (dst);
 	i = 0;
-	while (p[i])
-		free(p[i++]);
-	free(p);
+	while (i < n)
+	{
+		((unsigned char *)dst)[i] = ((unsigned char *)src)[i];
+		i++;
+	}
+	return ((unsigned char *)(dst));
 }

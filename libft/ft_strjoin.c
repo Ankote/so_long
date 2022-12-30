@@ -1,31 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aankote <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/22 19:22:56 by aankote           #+#    #+#             */
-/*   Updated: 2022/12/22 19:22:59 by aankote          ###   ########.fr       */
+/*   Created: 2022/10/14 12:17:19 by aankote           #+#    #+#             */
+/*   Updated: 2022/10/25 01:50:02 by aankote          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
-#include "so_long.h"
-
-int	succeed(t_graph *data)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	mlx_clear_window(data->mlx, data->mlx_win);
-	ft_putstr_fd("--YOU WIN--\n", 1);
-	exit(0);
-	return (0);
-}
-
-void	free_p(char **p)
-{
-	int	i;
+	int		i;
+	int		j;
+	size_t	total_size;
+	char	*newstr;
 
 	i = 0;
-	while (p[i])
-		free(p[i++]);
-	free(p);
+	j = 0;
+	if (!s1 || !s2)
+		return (0);
+	total_size = ft_strlen(s1) + ft_strlen(s2);
+	newstr = malloc(sizeof(char) * (total_size + 1));
+	if (!newstr)
+		return (0);
+	while (s1[i])
+	{
+		newstr[i] = s1[i];
+		i++;
+	}
+	while (s2[j])
+		newstr[i++] = s2[j++];
+	newstr[i] = '\0';
+	return (newstr);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_map.c                                         :+:      :+:    :+:   */
+/*   draw_map_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aankote <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/16 22:52:05 by aankote           #+#    #+#             */
-/*   Updated: 2022/12/16 22:52:06 by aankote          ###   ########.fr       */
+/*   Created: 2022/12/28 22:33:33 by aankote           #+#    #+#             */
+/*   Updated: 2022/12/28 22:34:01 by aankote          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	img_path(t_graph *data)
 			"assets/images/player/front.xpm", &w, &w);
 	data->floor = mlx_xpm_file_to_image(data->mlx, "assets/images/floor.xpm",
 			&w, &w);
+	data->toxic = mlx_xpm_file_to_image(data->mlx,
+			"assets/images/toxic-river.xpm", &w, &w);
 	data->p_left = mlx_xpm_file_to_image(data->mlx,
 			"assets/images/player/left.xpm", &w, &w);
 	data->p_right = mlx_xpm_file_to_image(data->mlx,
@@ -52,6 +54,8 @@ int	imgadd(t_graph *data, int x, int y, int base)
 	else if (base == 'O')
 		mlx_put_image_to_window(data->mlx, data->mlx_win, data->open_exit, x,
 			y);
+	else if (base == 'T')
+		mlx_put_image_to_window(data->mlx, data->mlx_win, data->toxic, x, y);
 	else if (base == 'P')
 		mlx_put_image_to_window(data->mlx, data->mlx_win, data->player, x, y);
 	else if (base == 'L')

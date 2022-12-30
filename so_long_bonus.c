@@ -1,15 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   so_long_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aankote <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/26 02:27:53 by aankote           #+#    #+#             */
-/*   Updated: 2022/12/26 02:27:59 by aankote          ###   ########.fr       */
+/*   Created: 2022/12/28 22:35:26 by aankote           #+#    #+#             */
+/*   Updated: 2022/12/28 22:35:38 by aankote          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 static int	x_graph(t_graph *data)
 {
@@ -58,6 +58,7 @@ int	open_window(char *map)
 	img_path(&data);
 	addimg(&data);
 	mlx_hook(data.mlx_win, 2, 0, keyhook, &data);
+	mlx_loop_hook(data.mlx, anim, &data);
 	mlx_hook(data.mlx_win, 17, 0, close_prog, &data);
 	mlx_loop(data.mlx);
 	return (1);

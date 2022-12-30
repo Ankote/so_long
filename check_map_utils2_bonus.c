@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_map_utils.c                                  :+:      :+:    :+:   */
+/*   check_map_utils_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aankote <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/23 21:46:14 by aankote           #+#    #+#             */
-/*   Updated: 2022/12/23 21:46:16 by aankote          ###   ########.fr       */
+/*   Created: 2022/12/28 22:37:08 by aankote           #+#    #+#             */
+/*   Updated: 2022/12/28 22:37:19 by aankote          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 int	check_player(t_graph *data)
 {
@@ -94,10 +94,10 @@ int	check_caract(t_graph *data)
 		{
 			if (data->p[i][j] != '0' && data->p[i][j] != '1'
 				&& data->p[i][j] != 'C' && data->p[i][j] != 'E'
-				&& data->p[i][j] != 'P')
+				&& data->p[i][j] != 'P' && data->p[i][j] != 'T')
 			{
 				ft_putstr_fd("ERROR!!\nThe map can be composed of only these 5 characters:\
- {0,1,E,C,P}.\n", 1);
+ {0,1,E,C,P}, and {T} for enemy.\n", 1);
 				return (0);
 			}
 			j++;
