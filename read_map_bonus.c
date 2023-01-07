@@ -40,8 +40,8 @@ char	*read_map(int fd)
 			break ;
 		if (ft_strlen(buff) == 1)
 			ft_error("ERROR!\nEmpty line in map.\n");
-		free(buff);
 		res = ft_join(res, buff);
+		free(buff);
 	}
 	return (res);
 }

@@ -1,37 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aankote <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/22 19:22:56 by aankote           #+#    #+#             */
-/*   Updated: 2022/12/22 19:22:59 by aankote          ###   ########.fr       */
+/*   Created: 2022/11/14 20:09:18 by aankote           #+#    #+#             */
+/*   Updated: 2022/11/14 20:09:20 by aankote          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1
+# endif
+# include <fcntl.h>
+# include <stdlib.h>
+# include <unistd.h>
 
-int	succeed(t_graph *data)
-{
-	mlx_clear_window(data->mlx, data->mlx_win);
-	ft_putstr_fd("--YOU WIN--\n", 1);
-	exit(0);
-	return (0);
-}
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
+char	*get_next_line(int fd);
+char	*ft_strjoin(char const *s1, char const *s2);
+size_t	ft_strlen(const char *s);
+char	*ft_strchr(const char *s, int c);
 
-void	free_p(char **p)
-{
-	int	i;
-
-	i = 0;
-	while (p[i])
-		free(p[i++]);
-	free(p);
-}
-
-void	ft_print(char *str1, char *str2)
-{
-	ft_putstr_fd(str1, 1);
-	ft_putendl_fd(str2, 1);
-}
+#endif

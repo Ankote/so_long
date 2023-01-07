@@ -83,4 +83,5 @@ int			anim(t_graph *data);
 int			check_map(t_graph *data);
 int			check_path(t_graph *data, int base);
 void		free_p(char **p);
+void		ft_print(char *str1, char *str2);
 #endif

@@ -37,3 +37,9 @@ void	free_p(char **p)
 		free(p[i++]);
 	free(p);
 }
+
+void	ft_print(char *str1, char *str2)
+{
+	ft_putstr_fd(str1, 1);
+	ft_putendl_fd(str2, 1);
+}

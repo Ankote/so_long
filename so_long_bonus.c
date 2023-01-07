@@ -98,7 +98,7 @@ int	main(int argc, char **argv)
 		{
 			fd = open(argv[1], O_RDONLY);
 			map = read_map(fd);
-			if (!map)
+			if (!map || !ft_strncmp("", map, 1))
 				ft_error("ERROR!!\nNULL map");
 			if (fd < 0)
 			{

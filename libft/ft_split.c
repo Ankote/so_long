@@ -10,6 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
+#include "../get_next_line/get_next_line.h"
+#include "../so_long.h"
+#include <string.h>
 
 static void	*ft_free(char **c)
 {

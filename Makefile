@@ -33,7 +33,7 @@ $(NAME_B) : $(OBJCS_B)
 	@cd get_next_line &&  rm -fr *.o
 	@cd libft && $(MAKE)
 	@cd get_next_line && $(MAKE)
-	@$(CC)  $(OBJCS_B) $(INCLUDES) $(FRAMEWORKS) -o $(NAME_B)
+	@$(CC) $(OBJCS_B) $(INCLUDES) $(FRAMEWORKS) -o $(NAME_B)
 %.o : %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@echo "\033[0;32m𝘾𝙧𝙚𝙖𝙩𝙞𝙣𝙜 ...\033[0m"

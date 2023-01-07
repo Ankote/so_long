@@ -9,7 +9,7 @@
 /*   Updated: 2022/12/28 22:36:10 by aankote          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 static void	floodfill(char **p, int sr, int sc, int base)
 {

@@ -14,46 +14,62 @@
 
 int	right_move_p(t_graph *data)
 {
+	char	*nb;
+
 	data->p[data->y_pos][data->x_pos] = '0';
 	data->p[data->y_pos][data->x_pos + 1] = 'R';
 	mlx_clear_window(data->mlx, data->mlx_win);
 	addimg(data);
 	data->x_pos += 1;
-	ft_putstr_fd("Move : right\n", 1);
-	return (0);
+	data->move_cpt++;
+	nb = ft_itoa(data->move_cpt);
+	ft_print("Right  : ", nb);
+	return (free(nb), 0);
 }
 
 int	left_move_p(t_graph *data)
 {
+	char	*nb;
+
 	data->p[data->y_pos][data->x_pos] = '0';
 	data->p[data->y_pos][data->x_pos - 1] = 'L';
 	mlx_clear_window(data->mlx, data->mlx_win);
 	addimg(data);
 	data->x_pos -= 1;
-	ft_putstr_fd("Move : left\n", 1);
-	return (0);
+	data->move_cpt++;
+	nb = ft_itoa(data->move_cpt);
+	ft_print("Left  : ", nb);
+	return (free(nb), 0);
 }
 
 int	top_move_p(t_graph *data)
 {
+	char	*nb;
+
 	data->p[data->y_pos][data->x_pos] = '0';
 	data->p[data->y_pos - 1][data->x_pos] = 'B';
 	mlx_clear_window(data->mlx, data->mlx_win);
 	addimg(data);
 	data->y_pos -= 1;
-	ft_putstr_fd("Move : up\n", 1);
-	return (0);
+	data->move_cpt++;
+	nb = ft_itoa(data->move_cpt);
+	ft_print("Up  : ", nb);
+	return (free(nb), 0);
 }
 
 int	bottom_move_p(t_graph *data)
 {
+	char	*nb;
+
 	data->p[data->y_pos][data->x_pos] = '0';
 	data->p[data->y_pos + 1][data->x_pos] = 'P';
 	mlx_clear_window(data->mlx, data->mlx_win);
 	addimg(data);
 	data->y_pos += 1;
-	ft_putstr_fd("Move : down\n", 1);
-	return (0);
+	data->move_cpt++;
+	nb = ft_itoa(data->move_cpt);
+	ft_print("Down  : ", nb);
+	return (free(nb), 0);
 }
 
 int	opendor(t_graph *data)

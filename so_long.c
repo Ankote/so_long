@@ -40,7 +40,6 @@ int	open_window(char *map)
 {
 	t_graph	data;
 
-	data.game_over = 0;
 	data = *check_pos(map, 0, &data);
 	data.move_cpt = 0;
 	data.p = split_map(map);
@@ -97,8 +96,11 @@ int	main(int argc, char **argv)
 		{
 			fd = open(argv[1], O_RDONLY);
 			map = read_map(fd);
-			if (!map)
+			if (!map || !ft_strncmp(map, "", 1))
+			{
 				ft_error("ERROR!!\nNULL map");
+				exit (1);
+			}
 			if (fd < 0)
 			{
 				ft_putstr_fd("ERROR!\npath map name invalid.\n", 1);

@@ -67,7 +67,7 @@ path to go the exit.\n", 1);
 	{
 		if (!check_exist(p, 'C'))
 		{
-			ft_putstr_fd("ERROR!\nthere is no valid path\
+			ft_putstr_fd("ERROR!\nthere is no valid path \
 to catch all collectibles\n", 1);
 			return (free_p(p), 0);
 		}

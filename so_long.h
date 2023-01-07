@@ -32,6 +32,7 @@ typedef struct s_graph
 	int		x_width;
 	int		y_height;
 	void	*open_exit;
+	int		game_over;
 	void	*wall;
 	void	*floor;
 	void	*player;
@@ -44,7 +45,6 @@ typedef struct s_graph
 	void	*dead;
 	void	*img;
 	char	*addr;
-	int		game_over;
 	int		x_dor;
 	int		y_dor;
 	int		move_cpt;
@@ -68,7 +68,6 @@ int			bottom_move_p(t_graph *data);
 int			opendor(t_graph *data);
 int			succeed(t_graph *data);
 int			count_coins(t_graph *data);
-int			game_over(t_graph *data);
 int			close_prog(t_graph *graph);
 int			check_name(char *mapname);
 int			check_circumf(t_graph *data);
@@ -79,8 +78,9 @@ int			check_caract(t_graph *data);
 int			check_rect(t_graph *data);
 void		img_path(t_graph *data);
 int			move(t_graph *data);
-int			anim(t_graph *data);
 int			check_map(t_graph *data);
 int			check_path(t_graph *data, int base);
 void		free_p(char **p);
+void		ft_print(char *str1, char *str2);
+
 #endif
